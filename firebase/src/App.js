@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {
 	BrowserRouter as Router,
-	Route, Link
+	Route
 } from 'react-router-dom';
 
 import Home from './Components/Home'
@@ -16,6 +16,7 @@ class App extends Component {
 					<div>
 						<Navigation />
 
+						{/* Routes */}
 						<Route exact={true} path={'/'} component={Home} />
 						<Route exact={true} path={'/about'} component={About} />
 					</div>
