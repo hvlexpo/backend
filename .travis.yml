@@ -1,1 +1,91 @@
+matrix:
+  include:
 
+    # Flutter Android build
+    - os: linux
+      dist: xenial
+      language: android
+      env:
+        global:
+          - ANDROID_API_LEVEL=28
+          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+          - ANDROID_ABI=armeabi-v7a
+          - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
+      android:
+        components:
+          - tools
+          - platform-tools
+          - tools
+          - extra-android-m2repository
+      licenses:
+        - android-sdk-preview-license-.+
+        - android-sdk-license-.+
+        - google-gdk-license-.+
+      jdk: oraclejdk8
+      sudo: false
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - libstdc++6
+            - fonts-droid
+            - ruby-full
+            - gradle
+      before_install:
+        - gem install bundler -v 1.17.3
+        - touch $HOME/.android/repositories.cfg
+        - yes | sdkmanager "platforms;android-28"
+        - yes | sdkmanager "build-tools;28.0.3"
+      before_script:
+        - cd mobile
+        - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
+        - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
+        - flutter doctor
+        - cd android && bundle install && cd ..
+      script:
+        - flutter packages get
+        - flutter clean
+        - flutter test
+        - flutter build apk --build-number=$TRAVIS_BUILD_NUMBER
+
+    # Flutter iOS build
+    - os: osx
+      language: generic
+      env:
+        global:
+          - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
+      osx_image: xcode10.1
+      addons:
+        homebrew:
+          update: true
+          packages:
+            - ideviceinstaller
+            - ios-deploy
+            - libimobiledevice
+            - usbmuxd
+      before_install:
+        - gem install bundler
+        - yes | gem uninstall cocoapods
+        - yes | rm /usr/local/bin/xcodeproj
+        - brew install cocoapods
+        - yes | brew link --overwrite cocoapods
+        - cd mobile
+        - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
+        - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
+        - sudo chmod -R 777 flutter/*
+      before_script:
+        - flutter doctor
+        - cd ios && bundle install && cd ..
+      script:
+        - flutter packages get
+        - flutter clean
+        - flutter test
+        - flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
+cache:
+  directories:
+    - $HOME/.pub-cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
