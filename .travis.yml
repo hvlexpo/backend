@@ -81,7 +81,7 @@ matrix:
         - flutter packages get
         - flutter clean
         - flutter test
-        - flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
+        - travis_wait 30 flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
 
     # React tests
     -  name: "React App"
