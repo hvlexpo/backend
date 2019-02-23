@@ -42,6 +42,17 @@ Information on how to use both the web and mobile clients.
 
 Information on how to download and install/run web and mobile clients.
 
+## Progress
+
+| Week          | To-do                               | Done  |
+| ------------- | ----------------------------------- | :---: |
+| 9             | Initial planning, product planning  | ✅    |
+| 10            | First iteration; vision             | 🔄    |
+| 11            | Second iteration; architecture      | 🔜    |
+| 12            | Third iteration; implementation     | 🔜    |
+| 13            | Fourth iteration; implementation    | 🔜    |
+| 14            | Presentation and summary            | 🔜    |
+
 ## Credits
 
 This software uses the following open source packages:
