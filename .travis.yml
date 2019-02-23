@@ -78,6 +78,27 @@ matrix:
         - flutter clean
         - flutter test
         - flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
+
+    # React tests
+    -  language: node_js
+       node_js:
+         - "stable"
+       cache:
+         directories:
+          - firebase/node_modules
+       script:
+         - cd firebase
+         
+         - npm test
+         - npm run build
+       #deploy:
+        #  provider: surge
+        # skip_cleanup: true
+        #  domain: <my_name_here>.surge.sh
+        # project: ./build/
+       #on:
+       #  branch: master
+
 cache:
   directories:
     - $HOME/.pub-cache
