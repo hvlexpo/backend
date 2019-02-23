@@ -9,12 +9,12 @@
 <h4 align="center">The HVL Expo experience built on <a href="https://flutter.io" target="_blank">Flutter</a>, <a href="https://reactjs.org/" target="_blank">React</a> and <a href="https://firebase.google.com/" target="_blank">Firebase</a>.</h4>
 
 <p align="center">
-  <a href="https://badge.fury.io/js/electron-markdownify">
+  <a href="https://travis-ci.org/sondregj/hvl-expo/">
     <img src="https://travis-ci.org/sondregj/hvl-expo.svg?branch=master"
          alt="Gitmoji">
   </a>
-  <a href="https://gitter.im/amitmerchant1990/electron-markdownify"><img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg"></a>
-  <a href="https://saythanks.io/to/amitmerchant1990">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg"></a>
+  <a href="https://github.com/sondregj/hvl-expo/graphs/contributors">
       <img src="https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg">
   </a>
   <a href="https://www.hvl.no">
