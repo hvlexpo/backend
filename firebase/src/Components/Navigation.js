@@ -11,12 +11,12 @@ class Navigation extends Component {
 					<ul className={'left'}>
 						<li>
 							<Link to={'/'}>
-								<a className={'white-text'}>Home</a>
+								<span className={'white-text'}>Home</span>
 							</Link>
 						</li>
 						<li>
 							<Link to={'/about'}>
-								<a className={'white-text'}>About</a>
+								<span className={'white-text'}>About</span>
 							</Link>
 						</li>
 					</ul>
