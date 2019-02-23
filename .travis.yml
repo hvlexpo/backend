@@ -2,7 +2,8 @@ matrix:
   include:
 
     # Flutter Android build
-    - os: linux
+    - name: "Flutter Android"
+      os: linux
       dist: xenial
       language: android
       env:
@@ -50,7 +51,8 @@ matrix:
         - flutter build apk --build-number=$TRAVIS_BUILD_NUMBER
 
     # Flutter iOS build
-    - os: osx
+    - name: "Flutter iOS"
+      os: osx
       language: generic
       env:
         global:
@@ -82,7 +84,8 @@ matrix:
         - flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
 
     # React tests
-    -  language: node_js
+    -  name: "React App"
+       language: node_js
        node_js:
          - "stable"
        cache:
@@ -91,6 +94,7 @@ matrix:
        script:
          - cd firebase
          
+         - npm i
          - npm test
          - npm run build
        #deploy:
