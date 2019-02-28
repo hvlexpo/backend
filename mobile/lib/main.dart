@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'ui/theme/expo_colors.dart';
+import 'utils/routes.dart';
+import 'ui/pages/pages.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,19 +12,24 @@ class MyApp extends StatelessWidget {
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
 
+  final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'HVL Expo',
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver],
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryColor: ExpoColors.hvlPrimary,
+        accentColor: ExpoColors.hvlAccent,
       ),
-      home: MyHomePage(
-        title: 'HVL Expo',
-        analytics: analytics,
-        observer: observer,
-      ),
+      routes: {
+        Routes.home: (context) => MyHomePage(title: 'HVL Expo'),
+        Routes.main: (context) => MainPage(title: 'HVL Expo')
+      },
+      initialRoute: Routes.main,
     );
   }
 }
