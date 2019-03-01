@@ -4,7 +4,6 @@ import 'post_item.dart';
 import '../theme/expo_colors.dart';
 import 'package:date_format/date_format.dart';
 import 'package:side_header_list_view/side_header_list_view.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class PostsList extends StatelessWidget {
   final List<Post> posts;
@@ -38,6 +37,4 @@ class PostsList extends StatelessWidget {
       },
     );
   }
-
-  Future<void> _onRefresh() async {}
 }

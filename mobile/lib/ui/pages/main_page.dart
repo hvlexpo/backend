@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hvl_expo/ui/theme/expo_colors.dart';
 import '../containers/posts_list.dart';
 import '../containers/loading_indicator.dart';
+import 'package:hvl_expo/utils/routes.dart';
 import 'package:hvl_expo/models/models.dart';
 import 'package:hvl_expo/data/http/hvl_client.dart';
 
@@ -15,8 +16,11 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/images/hvl_logo.png',
-        width: 25, height: 25,),
+        title: Image.asset(
+          'assets/images/hvl_logo.png',
+          width: 25,
+          height: 25,
+        ),
         centerTitle: true,
         elevation: 0.5,
         backgroundColor: Colors.white,
@@ -60,10 +64,10 @@ class MainPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: null,
+        onPressed: () => {Navigator.pushNamed(context, Routes.scan)},
         elevation: 4.0,
         icon: Icon(Icons.nfc),
-        backgroundColor: ExpoColors.hvlPrimary,
+        backgroundColor: ExpoColors.hvlAccent,
         foregroundColor: Colors.white,
         label: Text('Scan'),
       ),

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import 'ui/theme/expo_colors.dart';
+import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
+import 'ui/theme/theme.dart';
 import 'utils/routes.dart';
 import 'ui/pages/pages.dart';
 
-void main() => runApp(MyApp());
+List<CameraDescription> cameras;
 
-class MyApp extends StatelessWidget {
+Future<void> main() async {
+  cameras = await availableCameras();
+  runApp(ExpoApp());
+}
+
+class ExpoApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
@@ -20,14 +26,10 @@ class MyApp extends StatelessWidget {
       title: 'HVL Expo',
       debugShowCheckedModeBanner: false,
       navigatorObservers: [routeObserver],
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: ExpoColors.hvlPrimary,
-        accentColor: ExpoColors.hvlAccent,
-      ),
+      theme: ExpoTheme.primaryTheme,
       routes: {
-        Routes.home: (context) => MyHomePage(title: 'HVL Expo'),
-        Routes.main: (context) => MainPage(title: 'HVL Expo')
+        Routes.main: (context) => MainPage(title: 'HVL Expo'),
+        Routes.scan: (context) => ScannerPage(cameras: cameras),
       },
       initialRoute: Routes.main,
     );

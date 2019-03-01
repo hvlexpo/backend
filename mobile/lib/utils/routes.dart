@@ -1,4 +1,4 @@
 class Routes {
-  static final home = '/home';
   static final main = '/';
+  static final scan = '/scan';
 }
