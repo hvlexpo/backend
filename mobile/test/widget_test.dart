@@ -12,7 +12,5 @@ import 'package:hvl_expo/main.dart';
 
 void main() {
   testWidgets('Empty test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(ExpoApp());
   });
 }
