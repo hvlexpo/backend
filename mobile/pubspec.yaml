@@ -26,6 +26,7 @@ dependencies:
   equatable: ^0.2.0
   http: ^0.12.0+1
   date_format: ^1.0.6
+  local_auth: ^0.4.0+1
 
   # widgets
   liquid_pull_to_refresh: ^1.1.0
@@ -43,6 +44,9 @@ dependencies:
   # scripts dependencies
   args: ^1.5.1
   image: ^2.0.7
+
+  # theme
+  groovin_material_icons: ^1.1.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +76,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/images/hvl_logo.png
+    - assets/images/expo-transparent.png
 
   fonts:
     - family: Akademie
