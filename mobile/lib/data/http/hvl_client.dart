@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:hvl_expo/models/models.dart';
 
 class HvlHttpClient {
-  String baseUri = "https://hvl.no/service/calendar/month/nn-NO";
+  final String baseUri = "https://hvl.no/service/calendar/month/nn-NO";
   final DateTime date;
 
-  HvlHttpClient({@required this.date});
+  const HvlHttpClient({@required this.date});
 
   Future<List<Post>> fetchPosts() async {
     final response =
