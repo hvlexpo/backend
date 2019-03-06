@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hvl_expo/ui/pages/pages.dart';
 import 'package:hvl_expo/ui/theme/theme.dart';
-import 'package:hvl_expo/ui/containers/rounded_button.dart';
+import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'dart:async';
 
 typedef FutureVoidCallback();
@@ -24,39 +24,56 @@ class AuthPage extends StatelessWidget {
       backgroundColor: ExpoColors.hvlPrimary,
       body: SafeArea(
         child: Center(
-          child:Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-          children:<Widget>[
-            Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Form(
-              key: _phoneKey,
-              child: TextFormField(
-                style: TextStyle(
-                  color: ExpoColors.hvlAccent,
-                  fontSize: 22
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: Form(
+                  key: _phoneKey,
+                  child: TextFormField(
+                    style: TextStyle(color: ExpoColors.hvlAccent, fontSize: 22),
+                    decoration: InputDecoration(
+                        labelText: 'Phone number',
+                        filled: true,
+                        labelStyle:
+                            TextStyle(color: Colors.white, fontSize: 22),
+                        prefixText: '+47',
+                        prefixStyle: TextStyle(
+                            fontSize: 22, color: ExpoColors.hvlAccent)),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Enter your phone number';
+                      }
+                    },
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.send,
+                    controller: _phoneController,
+                    focusNode: _phoneFocus,
+                  ),
                 ),
-                decoration: InputDecoration(
-                  labelText: 'Phone number',
-                  filled: true,
-                  labelStyle: TextStyle(color: Colors.white, fontSize: 22),
-                  prefixText: '+47',
-                  prefixStyle: TextStyle(fontSize: 22, color: ExpoColors.hvlAccent)
+              ),
+              FlatButton.icon(
+                padding: EdgeInsets.only(top: 20),
+                icon: Icon(
+                  GroovinMaterialIcons.fire,
+                  color: Colors.black.withOpacity(0.4),
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Enter your phone number';
+                label: Text(
+                  'Debug Login',
+                  style: TextStyle(color: Colors.black.withOpacity(0.4)),
+                ),
+                onPressed: () async {
+                  final user = FirebaseAuth.instance.signInAnonymously();
+                  if (user != null) {
+                    onAuthenticated();
                   }
                 },
-                keyboardType: TextInputType.phone,
-                textInputAction: TextInputAction.send,
-                controller: _phoneController,
-                focusNode: _phoneFocus,
               ),
-            ),
-          ),]
+            ],
+          ),
         ),
-      ),),
+      ),
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: ExpoColors.hvlAccent,
           foregroundColor: Colors.white,

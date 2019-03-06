@@ -20,7 +20,7 @@ class PostPage extends StatelessWidget {
                fontSize: 16
              )),
              centerTitle: true,
-             titlePadding: EdgeInsets.all(20),
+             //titlePadding: EdgeInsets.all(20),
            ),
             automaticallyImplyLeading: false,
             centerTitle: true,

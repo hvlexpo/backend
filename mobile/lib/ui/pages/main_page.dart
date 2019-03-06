@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
         ],
       )),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => {Navigator.pushNamed(context, Routes.scan)},
+        onPressed: () => Navigator.pushNamed(context, Routes.scan),
         elevation: 4.0,
         icon: Icon(Icons.nfc),
         backgroundColor: ExpoColors.hvlAccent,

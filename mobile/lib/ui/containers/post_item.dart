@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hvl_expo/models/models.dart';
 import 'package:date_format/date_format.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import '../theme/expo_colors.dart';
 import '../pages/post_page.dart';
 
@@ -25,11 +26,11 @@ class PostItem extends StatelessWidget {
               Icons.calendar_today,
               color: ExpoColors.hvlPrimary,
             ),
-            title: Text(
+            title: AutoSizeText(
               post.title,
               maxLines: 2,
             ),
-            subtitle: Text(post.adress),
+            subtitle: Text(post.adress,),
             trailing: Text(
               post.campus.substring(0, 2),
               style: TextStyle(
