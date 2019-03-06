@@ -31,6 +31,7 @@ dependencies:
   # widgets
   liquid_pull_to_refresh: ^1.1.0
   side_header_list_view: ^0.0.4
+  auto_size_text: ^1.0.0
 
   # qr related
   fast_qr_reader_view:
@@ -77,6 +78,7 @@ flutter:
   assets:
     - assets/images/hvl_logo.png
     - assets/images/expo-transparent.png
+    - assets/images/firebase.png
 
   fonts:
     - family: Akademie
