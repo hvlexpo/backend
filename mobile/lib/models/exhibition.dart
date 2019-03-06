@@ -11,7 +11,7 @@ class Exhibition extends Equatable {
   String description;
 
   /// URL to the photo of the exhibition
-  String photoUrl;
+  List<String> photos;
 
   /// The registered votes for the exhibition,
   /// each vote is mapped to a user
@@ -20,20 +20,20 @@ class Exhibition extends Equatable {
   /// Constructs the object with a required [id] argument
   /// and optionally [name], [description], [photoUrl]
   /// and [votes] arguments
-  Exhibition(this.id, {String name, String description, String photoUrl, Map<String, String> votes})
+  Exhibition(this.id, {String name, String description, List<String> photos, Map<String, String> votes})
       : this.name = name ?? 'Unnamed',
         this.description = description ?? 'No description yet',
-        this.photoUrl = photoUrl ?? '',
+        this.photos = photos ?? List<String>(),
         this.votes = votes ?? Map<String, dynamic>();
   
   /// Creates a copy with optional [id], [name], [description],
   /// [photoUrl] and [votes] arguments.
-  Exhibition copyWith({String id, String name, String description, String photoUrl, Map<String, dynamic> votes}) {
+  Exhibition copyWith({String id, String name, String description, List<String> photos, Map<String, dynamic> votes}) {
     return Exhibition(
       id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
-      photoUrl: photoUrl ?? this.photoUrl,
+      photos: photos ?? this.photos,
       votes: votes ?? this.votes
     );
   }
@@ -41,7 +41,7 @@ class Exhibition extends Equatable {
   /// Returns a [String] representation of the object
   @override
   String toString() {
-    return 'Exhibition{ id: $id, name: $name, description: $description, photoUrl: $photoUrl, votes: $votes }';
+    return 'Exhibition{ id: $id, name: $name, description: $description, photos: $photos, votes: $votes }';
   }
 
   /// Returns a [Map<String, dynamic>] from the current object
@@ -50,7 +50,7 @@ class Exhibition extends Equatable {
       "id": id,
       "name": name,
       "description": description,
-      "photoUrl": photoUrl,
+      "photos": photos,
       "votes": votes,
     };
   }
@@ -61,7 +61,7 @@ class Exhibition extends Equatable {
       json["id"],
       name: json["name"],
       description: json["description"],
-      photoUrl: json["photoUrl"],
+      photos: json["photoUrl"],
       votes: json["votes"]
     );
   }  
