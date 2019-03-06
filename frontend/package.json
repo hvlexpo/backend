@@ -1,0 +1,27 @@
+{
+	"name": "hvl-expo",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^16.8.4",
+		"react-dom": "^16.8.4",
+		"react-router-dom": "^4.3.1"
+	},
+	"devDependencies": {
+		"react-scripts": "^2.1.5"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"deploy-now": "react-scripts build && now",
+		"yank": "react-scripts build && mv build ../backend/"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
+}
