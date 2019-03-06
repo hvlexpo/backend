@@ -26,14 +26,19 @@ class ExpoAppState extends State<ExpoApp> {
 
   Future<Null> _authenticate() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    bool canUseBiometrics = await LocalAuthentication().canCheckBiometrics;
 
     if (user == null) {
       setState(() {
         _authenticated = false;
       });
       return;
-    } else {
+    } else if (canUseBiometrics){
       _authenticateBiometric();
+    } else if (user != null) {
+      setState(() {
+       _authenticated = true; 
+      });
     }
   }
 
@@ -76,6 +81,7 @@ class ExpoAppState extends State<ExpoApp> {
         navigatorObservers: [widget.routeObserver],
         theme: ExpoTheme.primaryTheme,
         routes: {
+          Routes.main: (context) => MainPage(title: 'HVL Expo',),
           Routes.auth: (context) => AuthPage(onAuthenticated: _authenticate,),
           Routes.scan: (context) => ScannerPage(cameras: cameras),
         },
