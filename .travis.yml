@@ -83,16 +83,38 @@ matrix:
         - flutter test
         - travis_wait 30 flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
 
-    # React tests
+    # Node tests
+    -  name: "Node Backend"
+       language: node_js
+       node_js:
+         - "stable"
+       cache:
+         directories:
+          - backend/node_modules
+       script:
+         - cd backend
+         
+         - npm i
+         - npm test
+         #- npm run build
+       #deploy:
+        #  provider: surge
+        # skip_cleanup: true
+        #  domain: <my_name_here>.surge.sh
+        # project: ./build/
+       #on:
+       #  branch: master
+
+       # React tests
     -  name: "React App"
        language: node_js
        node_js:
          - "stable"
        cache:
          directories:
-          - firebase/node_modules
+          - frontend/node_modules
        script:
-         - cd firebase
+         - cd frontend
          
          - npm i
          - npm test
