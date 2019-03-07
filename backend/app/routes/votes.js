@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const VotesService = require('../services/votes')
+const VotesService = require('../services/vote')
 
 const router = new Router()
 
