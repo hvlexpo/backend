@@ -38,6 +38,18 @@
 
 Information on how to use both the web and mobile clients.
 
+## Development
+
+The development of each part of the software will happen on it's own branch. After significant progress, a pull request can be made to merge it into master. In general you shouldn't commit directly to master. You should also consider branching out from each respective branch if you are going to work on a specific feature or issue, and then make a pull request back to the original branch.
+
+For pull requests to be merged into master they must be reviewed and pass all the tests.
+
+Flutter development will be on the branch `mobile-development`.
+
+Backend development will be on the branch `backend-development`.
+
+Frontend development will be on the branch `frontend-development`.
+
 ## Installation
 
 Information on how to download and install/run web and mobile clients.
