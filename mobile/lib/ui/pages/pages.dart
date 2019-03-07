@@ -5,3 +5,5 @@ export 'settings_page.dart';
 export 'auth_page.dart';
 export 'post_page.dart';
 export 'phone_code_page.dart';
+export 'exhibitions_page.dart';
+export 'exhibition_page.dart';

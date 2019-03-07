@@ -78,6 +78,11 @@ class SettingsPage extends StatelessWidget {
                 context, Routes.auth, (Route<dynamic> route) => false);
           },
         ),
+        FlatButton.icon(
+          icon: Icon(GroovinMaterialIcons.artist, color: ExpoColors.hvlPrimary,),
+          label: Text('Exhibitions', style:labelStyle),
+          onPressed: () => Navigator.pushNamed(context, Routes.exhibitions),
+        )
       ],
     );
   }

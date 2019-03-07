@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 import '../containers/qr_reader.dart';
 import 'package:meta/meta.dart';
+import 'package:hvl_expo/data/http/expo_client.dart';
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
+import 'package:hvl_expo/ui/pages/exhibition_page.dart';
 
 class ScannerPage extends StatefulWidget {
   final List<CameraDescription> cameras;
+  final ExpoHttpClient client = ExpoHttpClient();
 
   ScannerPage({@required this.cameras, Key key}) : super(key: key);
 
@@ -65,9 +68,13 @@ class _ScannerPageState extends State<ScannerPage> {
     );
   }
 
-  void _onScanned(dynamic value) {
-    setState(() {
-      scannedText = value;
-    });
+  void _onScanned(dynamic value) async {
+    var item = await widget.client.fetchExhibitionById(value);
+
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(
+        builder: (context) => ExhibitionPage(exhibition: item,)
+      )
+    );
   }
 }
