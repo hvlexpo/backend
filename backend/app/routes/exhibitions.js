@@ -10,27 +10,27 @@ const routers = (mongoose) => new Router()
 */
 
 // Get all exhibitions
-router.get('exhibitions/', async (req, res) => {
+router.get('/api/exhibitions/', async (req, res) => {
 	res.send(await ExhibitionService.read())
 })
 
 // Read
-router.get('exhibitions/:id', async (req, res) => {
+router.get('/api/exhibitions/:id', async (req, res) => {
 	res.send(await ExhibitionService.read(req.params.id))
 })
 
 // Create
-router.post('exhibitions/:id', async (req, res) => {
+router.post('/api/exhibitions/:id', async (req, res) => {
 	res.send(await ExhibitionService.create(req.params.id))
 })
 
 // Update
-router.put('exhibitions/:id', async (req, res) => {
+router.put('/api/exhibitions/:id', async (req, res) => {
 	res.send(await ExhibitionService.update(req.params.id))
 })
 
 // Delete
-router.delete('exhibitions/:id', async (req, res) => {
+router.delete('/api/exhibitions/:id', async (req, res) => {
 	res.send(await ExhibitionService.delete(req.params.id))
 })
 

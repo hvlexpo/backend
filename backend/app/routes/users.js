@@ -10,27 +10,27 @@ const routers = (mongoose) => new Router()
 */
 
 // Get all users
-router.get('users/', async (req, res) => {
+router.get('/api/users/', async (req, res) => {
 	res.send(await UserService.read())
 })
 
 // Read
-router.get('users/:id', async (req, res) => {
+router.get('/api/users/:id', async (req, res) => {
 	res.send(await UserService.read(req.params.id))
 })
 
 // Create
-router.post('users/:id', async (req, res) => {
+router.post('/api/users/:id', async (req, res) => {
 	res.send(await UserService.create(req.params.id))
 })
 
 // Update
-router.put('users/:id', async (req, res) => {
+router.put('/api/users/:id', async (req, res) => {
 	res.send(await UserService.update(req.params.id))
 })
 
 // Delete
-router.delete('users/:id', async (req, res) => {
+router.delete('/api/users/:id', async (req, res) => {
 	res.send(await UserService.delete(req.params.id))
 })
 

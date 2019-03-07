@@ -10,27 +10,27 @@ const routers = (mongoose) => new Router()
 */
 
 // Get all votes
-router.get('votes/', async (req, res) => {
+router.get('/api/votes/', async (req, res) => {
 	res.send(await VotesService.read())
 })
 
 // Read
-router.get('votes/:id', async (req, res) => {
+router.get('/api/votes/:id', async (req, res) => {
 	res.send(await VotesService.read(req.params.id))
 })
 
 // Create
-router.post('votes/:id', async (req, res) => {
+router.post('/api/votes/:id', async (req, res) => {
 	res.send(await VotesService.create(req.params.id))
 })
 
 // Update
-router.put('votes/:id', async (req, res) => {
+router.put('/api/votes/:id', async (req, res) => {
 	res.send(await VotesService.update(req.params.id))
 })
 
 // Delete
-router.delete('votes/:id', async (req, res) => {
+router.delete('/api/votes/:id', async (req, res) => {
 	res.send(await VotesService.delete(req.params.id))
 })
 
