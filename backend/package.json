@@ -18,16 +18,23 @@
 		"morgan": "^1.9.1",
 		"parse-error": "^0.2.0",
 		"passport": "^0.4.0",
-		"passport-firebase-auth": "0.0.0-beta.1"
+		"passport-firebase-auth": "0.0.0-beta.1",
+		"passport-jwt": "^4.0.0"
 	},
 	"devDependencies": {
 		"eslint": "^5.15.1",
-		"now": "^14.0.3"
+		"now": "^14.0.3",
+		"nyc": "^13.3.0",
+		"rimraf": "^2.6.3",
+		"nodemon":"^1.18.10"
 	},
 	"scripts": {
 		"start": "node index.js",
+		"server": "nodemon",
 		"test": "eslint",
-		"build:react": "cd ../frontend && npm run yank",
+		"lint": "eslint",
+		"coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+		"build:react": "rimraf build && cd ../frontend && npm run yank",
 		"deploy:now": "now",
 		"deploy:now:alias": "now && now alias"
 	},

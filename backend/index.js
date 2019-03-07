@@ -1,3 +1,4 @@
+const http = require('http')
 const pe = require('parse-error')
 
 // Environment variables config
@@ -10,8 +11,17 @@ if (env.error) {
 
 const app = require('./app')
 
-app.listen(3000)
+const server = http
+	.createServer(app)
+	.listen(8080, () => console.log('🔓  HTTP Server started on port 3000.'))
 
 process.on('unhandledRejection', error => {
 	console.error('Uncaught Error', pe(error))
+})
+
+process.on('SIGINT', () => {
+	server.close(() => {
+		console.log('', '💤', ' Express shut down.')
+		process.exit(0)
+	})
 })

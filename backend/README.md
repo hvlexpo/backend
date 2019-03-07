@@ -6,4 +6,10 @@ Welcome to the backend server for HVL EXPO. The server is built with Node and us
 
 First, make sure you have installed Node and NPM.
 
+To run the app with the database, a `.env` file must be present in the config folder. If it is not, the app will quit with an error message. To make one, duplicate the `sample.env` file inside config and rename it to `.env`. You must then fill it with the appropriate values, which for testing purposes can be a MongoDB instance running on the local machine.
+
 *More information...*
+
+## License
+
+MIT
