@@ -5,7 +5,7 @@ const ExhibitionSchema = new Schema({
 	name: String,
 	desc: String,
 	photos: [String],
-	votes:  {
+	votes: {
 		type: Map,
 		of: Number
 	}

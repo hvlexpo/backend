@@ -1,21 +1,13 @@
 const UserModel = require('../models/user')
 
 class UserService {
-	static async create() {
-		
-	}
+	static async create() {}
 
-	static async read() {
-		
-	}
+	static async read() {}
 
-	static async update() {
-		
-	}
+	static async update() {}
 
-	static async delete() {
-		
-	}
+	static async delete() {}
 }
 
 module.exports = UserService

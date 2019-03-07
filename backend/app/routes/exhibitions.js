@@ -12,28 +12,20 @@ const routers = (mongoose) => new Router()
 // Get all exhibitions
 router.get('/', async (req, res, next) => {
 	const exhibition = await ExhibitionService.read()
-	
+
 	res.send(await ExhibitionService.read())
 })
 
 // Read
-router.get('/?id', async (req, res, next) => {
-
-})
+router.get('/?id', async (req, res, next) => {})
 
 // Create
-router.post('/?id', async (req, res, next) => {
-
-})
+router.post('/?id', async (req, res, next) => {})
 
 // Update
-router.put('/?id', async (req, res, next) => {
-
-})
+router.put('/?id', async (req, res, next) => {})
 
 // Delete
-router.delete('/?id', async (req, res, next) => {
-
-})
+router.delete('/?id', async (req, res, next) => {})
 
 module.exports = router

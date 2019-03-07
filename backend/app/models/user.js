@@ -3,8 +3,6 @@ const UserSchema = require('../schemas/user')
 
 const UserModel = mongoose.model('UserModel', UserSchema)
 
-UserModel.prototype.create = () => {
-	
-}
+UserModel.prototype.create = () => {}
 
 module.exports = UserModel

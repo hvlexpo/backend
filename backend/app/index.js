@@ -15,13 +15,17 @@ const app = express()
 
 app // Middleware
 	.use(helmet())
-	.use(express.json({type: 'application/json'}))
-	.use(express.urlencoded({extended: true}))
-	.use(express.static(require('path').join(__dirname, '..', 'build'), { dotfiles: 'ignore' }))
+	.use(express.json({ type: 'application/json' }))
+	.use(express.urlencoded({ extended: true }))
+	.use(
+		express.static(require('path').join(__dirname, '..', 'build'), {
+			dotfiles: 'ignore'
+		})
+	)
 
-	
 // Setup dev config
-if (process.env.NODE_ENV !== 'production') { // ( CORS middleware, allows cross origin access during development )
+if (process.env.NODE_ENV !== 'production') {
+	// ( CORS middleware, allows cross origin access during development )
 	app.use(logger('dev'))
 } else {
 	app.use(logger('tiny'))
