@@ -30,8 +30,8 @@ class _QrReaderState extends State<QrReader> {
   void _setController() {
     controller = QRReaderController(
         widget.cameras[0], ResolutionPreset.medium, [CodeFormat.qr],
-        (dynamic value) {
-      widget.onScanned(value);
+        (dynamic value) async {
+      await widget.onScanned(value);
       Future.delayed(
           const Duration(microseconds: 10), controller.startScanning);
     });

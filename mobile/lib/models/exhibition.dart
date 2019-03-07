@@ -20,7 +20,7 @@ class Exhibition extends Equatable {
   /// Constructs the object with a required [id] argument
   /// and optionally [name], [description], [photoUrl]
   /// and [votes] arguments
-  Exhibition(this.id, {String name, String description, List<String> photos, Map<String, String> votes})
+  Exhibition(this.id, {String name, String description, List<String> photos, Map<String, dynamic> votes})
       : this.name = name ?? 'Unnamed',
         this.description = description ?? 'No description yet',
         this.photos = photos ?? List<String>(),
@@ -56,12 +56,12 @@ class Exhibition extends Equatable {
   }
 
   /// Returns a User object created from the [json] map taken as an argument
-  static Exhibition fromJson(Map<String, dynamic> json) {
+  static Exhibition fromJson(Map<String, dynamic> json) {    
     return Exhibition(
       json["id"],
       name: json["name"],
       description: json["description"],
-      photos: json["photoUrl"],
+      photos: json["photos"].cast<String>(),
       votes: json["votes"]
     );
   }  

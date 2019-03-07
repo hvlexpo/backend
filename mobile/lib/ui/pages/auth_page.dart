@@ -7,16 +7,29 @@ import 'dart:async';
 
 typedef FutureVoidCallback();
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   final FutureVoidCallback onAuthenticated;
   AuthPage({
     Key key,
     @required this.onAuthenticated,
   }) : super(key: key);
 
+  @override
+  _AuthPageState createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+
   final _phoneKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _phoneFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    _phoneFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +79,7 @@ class AuthPage extends StatelessWidget {
                 onPressed: () async {
                   final user = FirebaseAuth.instance.signInAnonymously();
                   if (user != null) {
-                    onAuthenticated();
+                    widget.onAuthenticated();
                   }
                 },
               ),
@@ -85,7 +98,7 @@ class AuthPage extends StatelessWidget {
               Future.delayed(Duration(milliseconds: 500));
               final user = await FirebaseAuth.instance.currentUser();
               if (user != null) {
-                onAuthenticated();
+                widget.onAuthenticated();
                 return;
               }
               Navigator.of(context).push(MaterialPageRoute(
@@ -149,7 +162,7 @@ class AuthPage extends StatelessWidget {
   void onCodeEntered({String verId, String smsCode}) async {
     final user = await signinPhone(smsCode, verId);
     if (user != null) {
-      onAuthenticated();
+      widget.onAuthenticated();
       return;
     }
   }

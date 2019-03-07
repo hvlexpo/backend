@@ -61,8 +61,8 @@ class ExpoAppState extends State<ExpoApp> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addObserver(LifecycleEventHandler(
-        resumeCallBack: _authenticate, suspendingCallBack: _authenticate));
+    /*WidgetsBinding.instance.addObserver(LifecycleEventHandler(
+        resumeCallBack: _authenticate, suspendingCallBack: _authenticate));*/
   }
 
   @override
@@ -82,9 +82,10 @@ class ExpoAppState extends State<ExpoApp> {
         theme: ExpoTheme.primaryTheme,
         routes: {
           Routes.main: (context) => MainPage(title: 'HVL Expo',),
+          Routes.exhibitions: (context) => ExhibitionsPage(),
           Routes.auth: (context) => AuthPage(onAuthenticated: _authenticate,),
           Routes.scan: (context) => ScannerPage(cameras: cameras),
         },
-        home: !_authenticated ? AuthPage(onAuthenticated: _authenticate,) : MainPage(title: 'HVL Expo'));
+        home: _authenticated ? MainPage(title: 'HVL Expo',) : AuthPage(onAuthenticated: _authenticate,));//!_authenticated ? AuthPage(onAuthenticated: _authenticate,) : MainPage(title: 'HVL Expo'));
   }
 }
