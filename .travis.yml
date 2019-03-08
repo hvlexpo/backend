@@ -3,6 +3,7 @@ matrix:
 
     # Flutter Android build
     - name: "Flutter Android"
+      if: branch IN (master, mobile-development)
       os: linux
       dist: xenial
       language: android
@@ -54,6 +55,7 @@ matrix:
     - name: "Flutter iOS"
       os: osx
       language: generic
+      if: branch IN (master, mobile-development)
       env:
         global:
           - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
@@ -83,16 +85,40 @@ matrix:
         - flutter test
         - travis_wait 30 flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
 
-    # React tests
-    -  name: "React App"
+    # Node tests
+    -  name: "Node Backend"
        language: node_js
+       if: branch IN (master, backend-development)
        node_js:
          - "stable"
        cache:
          directories:
-          - firebase/node_modules
+          - backend/node_modules
        script:
-         - cd firebase
+         - cd backend
+         
+         - npm i
+         - npm test
+         #- npm run build
+       #deploy:
+        #  provider: surge
+        # skip_cleanup: true
+        #  domain: <my_name_here>.surge.sh
+        # project: ./build/
+       #on:
+       #  branch: master
+
+       # React tests
+    -  name: "React App"
+       language: node_js
+       if: branch IN (master, frontend-development)
+       node_js:
+         - "stable"
+       cache:
+         directories:
+          - frontend/node_modules
+       script:
+         - cd frontend
          
          - npm i
          - npm test
