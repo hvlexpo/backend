@@ -9,9 +9,9 @@
 <h4 align="center">The HVL Expo experience built on <a href="https://flutter.io" target="_blank">Flutter</a>, <a href="https://reactjs.org/" target="_blank">React</a> and <a href="https://firebase.google.com/" target="_blank">Firebase</a>.</h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/sondregj/hvl-expo/">
-    <img src="https://travis-ci.org/sondregj/hvl-expo.svg?branch=master"
-         alt="Gitmoji">
+  <a href="https://travis-ci.com/hvlexpo/hvlexpo/">
+    <img src="https://travis-ci.com/hvlexpo/hvlexpo.svg?branch=master"
+         alt="Travis CI">
   </a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg"></a>
   
