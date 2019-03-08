@@ -37,8 +37,8 @@ const // Routers
 	votes = require('./routes/votes')
 
 app // Routes
-	.use('/exhibitions', exhibitions)
-	.use('/users', users)
-	.use('/votes', votes)
+	.use('/api/exhibitions', exhibitions)
+	.use('/api/users', users)
+	.use('/api/votes', votes)
 
 module.exports = app
