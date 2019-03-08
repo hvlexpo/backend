@@ -6,7 +6,13 @@ const helmet = require('helmet')
 const logger = require('morgan')
 
 // Start Mongoose
-require('./db/mongoose')
+//require('./db/mongoose')
+const postgres = require('./db/postgres')
+
+//postgres.query('CREATE TABLE json_data (data JSONB)')
+//postgres.query(
+//	'INSERT INTO json_data (data) VALUES(\'{ "name": "Apple Phone","type": "phone"}\')'
+//)
 
 // Initialize Express app
 const app = express()

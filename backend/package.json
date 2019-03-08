@@ -19,7 +19,8 @@
 		"parse-error": "^0.2.0",
 		"passport": "^0.4.0",
 		"passport-firebase-auth": "0.0.0-beta.1",
-		"passport-jwt": "^4.0.0"
+		"passport-jwt": "^4.0.0",
+		"pg": "^7.8.2"
 	},
 	"devDependencies": {
 		"eslint": "^5.15.1",
