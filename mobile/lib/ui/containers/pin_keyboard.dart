@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hvl_expo/ui/theme/theme.dart';
+import 'package:expo/ui/theme/theme.dart';
 
 typedef StringCallback(String digit);
 

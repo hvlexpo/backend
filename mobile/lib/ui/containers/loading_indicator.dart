@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hvl_expo/ui/theme/expo_colors.dart';
+import 'package:expo/ui/theme/expo_colors.dart';
 
 class LoadingIndicator extends StatelessWidget {
   LoadingIndicator({Key key}) : super(key: key);

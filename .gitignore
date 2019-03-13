@@ -235,3 +235,5 @@ node_modules/
 .env
 
 
+mobile/android/.project
+mobile/android/.settings/org.eclipse.buildship.core.prefs

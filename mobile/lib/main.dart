@@ -1,91 +1,78 @@
+import 'package:redux/redux.dart';
+import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
-import 'ui/theme/theme.dart';
-import 'utils/routes.dart';
-import 'ui/pages/pages.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:hvl_expo/utils/lifecycle_handler.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:expo/redux/app/app_middleware.dart';
+import 'package:expo/redux/app/app_state.dart';
+import 'package:expo/redux/app/app_reducer.dart';
+import 'package:expo/redux/auth/auth_middleware.dart';
+import 'package:expo/ui/app/init.dart';
+import 'package:expo/ui/auth/login_vm.dart';
+import 'package:expo/ui/home/home_screen.dart';
+import 'package:expo/ui/theme/theme.dart';
+import 'package:expo/ui/user/user_screen.dart';
+import 'package:expo/ui/user/edit/user_edit_vm.dart';
+import 'package:expo/ui/user/view/user_view_vm.dart';
+import 'package:expo/redux/user/user_actions.dart';
+import 'package:expo/redux/user/user_middleware.dart';
 
-List<CameraDescription> cameras;
+import 'package:expo/ui/exhibition/exhibition_screen.dart';
+import 'package:expo/ui/exhibition/edit/exhibition_edit_vm.dart';
+import 'package:expo/ui/exhibition/view/exhibition_view_vm.dart';
+import 'package:expo/redux/exhibition/exhibition_actions.dart';
+import 'package:expo/redux/exhibition/exhibition_middleware.dart';
 
-Future<void> main() async {
-  cameras = await availableCameras();
-  runApp(ExpoApp());
+void main() {
+  final store = Store<AppState>(appReducer,
+      initialState: AppState(),
+      middleware: []
+        ..addAll(createStoreAuthMiddleware())
+        ..addAll(createStorePersistenceMiddleware())
+        ..addAll(createStoreUsersMiddleware())
+        ..addAll(createStoreExhibitionsMiddleware())
+        ..addAll([
+          LoggingMiddleware.printer(),
+        ]));
+
+  runApp(SampleReduxApp(store: store));
 }
 
-class ExpoApp extends StatefulWidget {
-  final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+class SampleReduxApp extends StatefulWidget {
+  final Store<AppState> store;
+
+  SampleReduxApp({Key key, this.store}) : super(key: key);
 
   @override
-  ExpoAppState createState() => ExpoAppState();
+  _SampleReduxAppState createState() => _SampleReduxAppState();
 }
 
-class ExpoAppState extends State<ExpoApp> {
-  bool _authenticated = false;
-
-  Future<Null> _authenticate() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    bool canUseBiometrics = await LocalAuthentication().canCheckBiometrics;
-
-    if (user == null) {
-      setState(() {
-        _authenticated = false;
-      });
-      return;
-    } else if (canUseBiometrics){
-      _authenticateBiometric();
-    } else if (user != null) {
-      setState(() {
-       _authenticated = true; 
-      });
-    }
-  }
-
-  Future<Null> _authenticateBiometric() async {
-    bool authenticated = false;
-
-    authenticated = await LocalAuthentication().authenticateWithBiometrics(
-        localizedReason: 'Please authenticate to access the app',
-        useErrorDialogs: true,
-        stickyAuth: true);
-
-    if (mounted) {
-      setState(() {
-        _authenticated = authenticated;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    /*WidgetsBinding.instance.addObserver(LifecycleEventHandler(
-        resumeCallBack: _authenticate, suspendingCallBack: _authenticate));*/
-  }
-
-  @override
-  void didChangeDependencies() {
-    if (!_authenticated) {
-      _authenticate();
-    }
-    super.didChangeDependencies();
-  }
-
+class _SampleReduxAppState extends State<SampleReduxApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return StoreProvider<AppState>(
+      store: widget.store,
+      child: MaterialApp(
         title: 'HVL Expo',
         debugShowCheckedModeBanner: false,
-        navigatorObservers: [widget.routeObserver],
         theme: ExpoTheme.primaryTheme,
         routes: {
-          Routes.main: (context) => MainPage(title: 'HVL Expo',),
-          Routes.exhibitions: (context) => ExhibitionsPage(),
-          Routes.auth: (context) => AuthPage(onAuthenticated: _authenticate,),
-          Routes.scan: (context) => ScannerPage(cameras: cameras),
+          InitScreen.route: (context) => InitScreen(),
+          LoginScreen.route: (context) => LoginScreen(),
+          HomeScreen.route: (context) => HomeScreen(),
+          UserScreen.route: (context) {
+            widget.store.dispatch(LoadUsers());
+            return UserScreen();
+          },
+          UserViewScreen.route: (context) => UserViewScreen(),
+          UserEditScreen.route: (context) => UserEditScreen(),
+          ExhibitionScreen.route: (context) {
+            widget.store.dispatch(LoadExhibitions());
+            return ExhibitionScreen();
+          },
+          ExhibitionViewScreen.route: (context) => ExhibitionViewScreen(),
+          ExhibitionEditScreen.route: (context) => ExhibitionEditScreen(),
         },
-        home: _authenticated ? MainPage(title: 'HVL Expo',) : AuthPage(onAuthenticated: _authenticate,));//!_authenticated ? AuthPage(onAuthenticated: _authenticate,) : MainPage(title: 'HVL Expo'));
+      ),
+    );
   }
 }
