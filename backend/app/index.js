@@ -1,18 +1,22 @@
 'use strict'
 
 const express = require('express')
-
 const helmet = require('helmet')
 const logger = require('morgan')
 
 // Start Mongoose
 //require('./db/mongoose')
+
+//Start Postgres
 const postgres = require('./db/postgres')
 
-//postgres.query('CREATE TABLE json_data (data JSONB)')
-//postgres.query(
-//	'INSERT INTO json_data (data) VALUES(\'{ "name": "Apple Phone","type": "phone"}\')'
-//)
+//Create initial empty table if not exists
+const createVoteTable = require('./schemas/vote')
+const createUserTable = require('./schemas/user')
+const createExhibitionTable = require('./schemas/exhibition')
+postgres.query(createVoteTable)
+postgres.query(createUserTable)
+postgres.query(createExhibitionTable)
 
 // Initialize Express app
 const app = express()

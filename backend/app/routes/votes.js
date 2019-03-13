@@ -11,7 +11,7 @@ const routers = (mongoose) => new Router()
 
 // Get all votes
 router.get('/', async (req, res) => {
-	res.send(await VotesService.read())
+	res.send(await VotesService.readAll())
 })
 
 // Read
@@ -21,12 +21,12 @@ router.get('/:id', async (req, res) => {
 
 // Create
 router.post('/:id', async (req, res) => {
-	res.send(await VotesService.create(req.params.id))
+	res.send(await VotesService.create(req.params.id, req.body))
 })
 
 // Update
 router.put('/:id', async (req, res) => {
-	res.send(await VotesService.update(req.params.id))
+	res.send(await VotesService.update(req.params.id, req.body))
 })
 
 // Delete
