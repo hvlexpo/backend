@@ -34,19 +34,19 @@ void main() {
           LoggingMiddleware.printer(),
         ]));
 
-  runApp(SampleReduxApp(store: store));
+  runApp(ExpoApp(store: store));
 }
 
-class SampleReduxApp extends StatefulWidget {
+class ExpoApp extends StatefulWidget {
   final Store<AppState> store;
 
-  SampleReduxApp({Key key, this.store}) : super(key: key);
+  ExpoApp({Key key, this.store}) : super(key: key);
 
   @override
-  _SampleReduxAppState createState() => _SampleReduxAppState();
+  _ExpoAppState createState() => _ExpoAppState();
 }
 
-class _SampleReduxAppState extends State<SampleReduxApp> {
+class _ExpoAppState extends State<ExpoApp> {
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
