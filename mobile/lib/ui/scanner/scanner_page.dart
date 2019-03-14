@@ -16,11 +16,6 @@ class ScannerPage extends StatefulWidget {
 class _ScannerPageState extends State<ScannerPage> {
   String scannedText = '';
 
-  final errorSnack = SnackBar(
-    content: Text('Could not start camera. Do you even have one?'),
-    backgroundColor: Colors.red,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +31,6 @@ class _ScannerPageState extends State<ScannerPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
             child: QrReader(
-              cameras: widget.cameras,
               onScanned: _onScanned,
             ),
           ),
@@ -65,5 +59,7 @@ class _ScannerPageState extends State<ScannerPage> {
     );
   }
 
-  void _onScanned(dynamic value) async {}
+  void _onScanned(dynamic value) async {
+    // TODO Implement post-scan processing and navigation
+  }
 }
