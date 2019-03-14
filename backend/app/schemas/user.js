@@ -7,6 +7,6 @@
 // 	}
 // })
 
-const UserSchema = 'CREATE TABLE IF NOT EXISTS users(data JSONB)'
+const UserSchema = 'CREATE TABLE IF NOT EXISTS users(id SERIAL, data JSONB)'
 
 module.exports = UserSchema

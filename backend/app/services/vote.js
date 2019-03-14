@@ -4,9 +4,9 @@
 const postgres = require('../db/postgres')
 
 class VoteService {
-	static async create(id, { name }) {
+	static async create({ exhibition_id, user_id, weight }) {
 		const { rows } = await postgres.query(
-			`INSERT INTO votes(data) VALUES('{"id": ${id}, "name": "${name}" }') RETURNING *`
+			`INSERT INTO votes(data) VALUES('{"exhibition_id": "${exhibition_id}", "user_id": "${user_id}", "weight": "${weight}" }') RETURNING *`
 		)
 		return rows[0].data
 	}
@@ -19,21 +19,21 @@ class VoteService {
 
 	static async read(id) {
 		const { rows } = await postgres.query(
-			`SELECT * FROM votes WHERE data -> 'id' = '${id}'`
+			`SELECT * FROM votes WHERE id = ${id}`
 		)
 		return rows[0].data
 	}
 
-	static async update(id, { name }) {
+	static async update(id, { exhibition_id, user_id, weight }) {
 		const { rows } = await postgres.query(
-			`UPDATE votes SET data = '{"id": ${id}, "name": "${name}" }' WHERE data -> 'id' = '${id}' RETURNING *`
+			`UPDATE votes SET data = '{"exhibition_id": "${exhibition_id}", "user_id": "${user_id}", "weight": "${weight}" }' WHERE id = ${id} RETURNING *`
 		)
 		return rows[0].data
 	}
 
 	static async delete(id) {
 		const { rows } = await postgres.query(
-			`DELETE FROM votes WHERE data -> 'id' = '${id}' RETURNING *`
+			`DELETE FROM votes WHERE id = ${id} RETURNING *`
 		)
 		return rows[0].data
 	}

@@ -20,8 +20,8 @@ router.get('/:id', async (req, res) => {
 })
 
 // Create
-router.post('/:id', async (req, res) => {
-	res.send(await ExhibitionService.create(req.params.id, req.body))
+router.post('/', async (req, res) => {
+	res.send(await ExhibitionService.create(req.body))
 })
 
 // Update

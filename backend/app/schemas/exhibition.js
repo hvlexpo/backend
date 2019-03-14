@@ -11,6 +11,7 @@
 // 	}
 // })
 
-const ExhibitionSchema = 'CREATE TABLE IF NOT EXISTS exhibitions(data JSONB)'
+const ExhibitionSchema =
+	'CREATE TABLE IF NOT EXISTS exhibitions(id SERIAL, data JSONB)'
 
 module.exports = ExhibitionSchema

@@ -3,9 +3,9 @@
 const postgres = require('../db/postgres')
 
 class ExhibitionService {
-	static async create(id, { name }) {
+	static async create({ name, desc, photo }) {
 		const { rows } = await postgres.query(
-			`INSERT INTO exhibitions(data) VALUES('{"id": ${id}, "name": "${name}" }') RETURNING *`
+			`INSERT INTO exhibitions(data) VALUES('{"name": "${name}", "desc": "${desc}", "photo": "${photo}" }') RETURNING *`
 		)
 		return rows[0].data
 	}
@@ -18,21 +18,21 @@ class ExhibitionService {
 
 	static async read(id) {
 		const { rows } = await postgres.query(
-			`SELECT * FROM exhibitions WHERE data -> 'id' = '${id}'`
+			`SELECT * FROM exhibitions WHERE id = ${id}`
 		)
 		return rows[0].data
 	}
 
-	static async update(id, { name }) {
+	static async update(id, { name, desc, photo }) {
 		const { rows } = await postgres.query(
-			`UPDATE exhibitions SET data = '{"id": ${id}, "name": "${name}" }' WHERE data -> 'id' = '${id}' RETURNING *`
+			`UPDATE exhibitions SET data = '{"name": "${name}", "desc": "${desc}", "photo": "${photo}" }' WHERE id = ${id} RETURNING *`
 		)
 		return rows[0].data
 	}
 
 	static async delete(id) {
 		const { rows } = await postgres.query(
-			`DELETE FROM exhibitions WHERE data -> 'id' = '${id}' RETURNING *`
+			`DELETE FROM exhibitions WHERE id = ${id} RETURNING *`
 		)
 		return rows[0].data
 	}
