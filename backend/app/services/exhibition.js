@@ -4,8 +4,10 @@ const postgres = require('../db/postgres')
 
 class ExhibitionService {
 	static async create({ name, desc, photo }) {
+		const value = [{ name, desc, photo }]
 		const { rows } = await postgres.query(
-			`INSERT INTO exhibitions(data) VALUES('{"name": "${name}", "desc": "${desc}", "photo": "${photo}" }') RETURNING *`
+			'INSERT INTO exhibitions(data) VALUES($1) RETURNING *',
+			value
 		)
 		return rows[0].data
 	}
@@ -17,22 +19,28 @@ class ExhibitionService {
 	}
 
 	static async read(id) {
+		const value = [id]
 		const { rows } = await postgres.query(
-			`SELECT * FROM exhibitions WHERE id = ${id}`
+			'SELECT * FROM exhibitions WHERE id = $1',
+			value
 		)
 		return rows[0].data
 	}
 
 	static async update(id, { name, desc, photo }) {
+		const value = [{ name, desc, photo }, id]
 		const { rows } = await postgres.query(
-			`UPDATE exhibitions SET data = '{"name": "${name}", "desc": "${desc}", "photo": "${photo}" }' WHERE id = ${id} RETURNING *`
+			'UPDATE exhibitions SET data = $1 WHERE id = $2 RETURNING *',
+			value
 		)
 		return rows[0].data
 	}
 
 	static async delete(id) {
+		const value = [id]
 		const { rows } = await postgres.query(
-			`DELETE FROM exhibitions WHERE id = ${id} RETURNING *`
+			'DELETE FROM exhibitions WHERE id = $1 RETURNING *',
+			value
 		)
 		return rows[0].data
 	}
