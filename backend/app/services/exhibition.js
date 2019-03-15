@@ -13,7 +13,7 @@ class ExhibitionService {
 	}
 
 	static async readAll() {
-		const { rows } = await postgres.query('SELECT * FROM exhibitions')
+		const { rows } = await postgres.query('SELECT data FROM exhibitions')
 		const response = rows.map(data => Object.values(data)[0])
 		return response
 	}

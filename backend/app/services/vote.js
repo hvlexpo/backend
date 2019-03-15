@@ -14,7 +14,7 @@ class VoteService {
 	}
 
 	static async readAll() {
-		const { rows } = await postgres.query('SELECT * FROM votes')
+		const { rows } = await postgres.query('SELECT data FROM votes')
 		const response = rows.map(data => Object.values(data)[0])
 		return response
 	}
