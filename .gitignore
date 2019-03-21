@@ -1,5 +1,9 @@
 # See https://www.dartlang.org/guides/libraries/private-files
 
+# Firebase Service Account Key
+backend/config/serviceAccountKey.json
+
+
 # Secret envs
 .env
 
