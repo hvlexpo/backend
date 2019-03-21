@@ -4,8 +4,7 @@ const express = require('express')
 const helmet = require('helmet')
 const logger = require('morgan')
 
-// Start Mongoose
-//require('./db/mongoose')
+const firebaseMiddleware = require('./auth/firebase')
 
 //Start Postgres
 const postgres = require('./db/postgres')
@@ -17,6 +16,7 @@ const createExhibitionTable = require('./schemas/exhibition')
 postgres.query(createVoteTable)
 postgres.query(createUserTable)
 postgres.query(createExhibitionTable)
+
 
 // Initialize Express app
 const app = express()
@@ -32,10 +32,10 @@ app // Middleware
 			dotfiles: 'ignore'
 		})
 	)
+	.use(firebaseMiddleware)
 
 // Setup dev config
 if (process.env.NODE_ENV !== 'production') {
-	// ( CORS middleware, allows cross origin access during development )
 	app.use(logger('dev'))
 } else {
 	app.use(logger('tiny'))
