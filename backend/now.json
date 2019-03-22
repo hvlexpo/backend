@@ -1,6 +1,0 @@
-{
-	"name": "hvl-expo",
-	"version": 1,
-	"alias": "expo.sondregjellestad.space",
-	"env": { "NODE_ENV": "production" }
-}
