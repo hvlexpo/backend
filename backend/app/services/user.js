@@ -1,10 +1,8 @@
-//const UserModel = require('../models/user')
-
 const postgres = require('../db/postgres')
 
 class UserService {
-	static async create({ name }) {
-		const value = [{ name }]
+	static async create(id, { name }) {
+		const value = [{ id, name }]
 		const { rows } = await postgres.query(
 			'INSERT INTO users(data) VALUES($1) RETURNING *',
 			value
@@ -21,16 +19,18 @@ class UserService {
 	static async read(id) {
 		const value = [id]
 		const { rows } = await postgres.query(
-			'SELECT * FROM users WHERE id = $1',
+			"SELECT * FROM users WHERE data ->> 'id'= $1",
 			value
 		)
-		return rows[0].data
+		if (rows[0]) {
+			return rows[0].data
+		}
 	}
 
 	static async update(id, { name }) {
-		const value = [{ name }, id]
+		const value = [{ id, name }, id]
 		const { rows } = await postgres.query(
-			'UPDATE users SET data = $1 WHERE id = $2 RETURNING *',
+			"UPDATE users SET data = $1 WHERE data ->> 'id'= $2 RETURNING *",
 			value
 		)
 		return rows[0].data
@@ -39,7 +39,7 @@ class UserService {
 	static async delete(id) {
 		const value = [id]
 		const { rows } = await postgres.query(
-			'DELETE FROM users WHERE id = $1 RETURNING *',
+			"DELETE FROM users WHERE data ->> 'id'= $1 RETURNING *",
 			value
 		)
 		return rows[0].data

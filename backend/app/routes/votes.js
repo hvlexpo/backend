@@ -4,34 +4,31 @@ const VotesService = require('../services/vote')
 
 const router = new Router()
 
-/*
-const routers = (mongoose) => new Router()
-	.get()
-*/
-
 // Get all votes
 router.get('/', async (req, res) => {
 	res.send(await VotesService.readAll())
 })
 
 // Read
-router.get('/:id', async (req, res) => {
-	res.send(await VotesService.read(req.params.id))
+router.get('/:exhibition_id', async (req, res) => {
+	res.send(await VotesService.read(req.user.id, req.params.exhibition_id))
 })
 
 // Create
 router.post('/', async (req, res) => {
-	res.send(await VotesService.create(req.body))
+	res.send(await VotesService.create(req.user.id, req.body))
 })
 
 // Update
-router.put('/:id', async (req, res) => {
-	res.send(await VotesService.update(req.params.id, req.body))
+router.put('/:exhibition_id', async (req, res) => {
+	res.send(
+		await VotesService.update(req.user.id, req.params.exhibition_id, req.body)
+	)
 })
 
 // Delete
-router.delete('/:id', async (req, res) => {
-	res.send(await VotesService.delete(req.params.id))
+router.delete('/:exhibition_id', async (req, res) => {
+	res.send(await VotesService.delete(req.user.id, req.params.exhibition_id))
 })
 
 module.exports = router

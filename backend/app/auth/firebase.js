@@ -8,19 +8,25 @@ admin.initializeApp({
 })
 
 module.exports = async (req, res, next) => {
-	const {FirebaseToken} = req.headers
-
-	if (!FirebaseToken) {
-		res.send({
+	const { firebasetoken } = req.headers
+	if (!firebasetoken) {
+		res.status().send({
 			error: 'No token.'
 		})
 	}
 
-	if (await admin.auth().verifyIdToken(FirebaseToken)) {
+	try {
+		const decodedToken = await admin.auth().verifyIdToken(firebasetoken)
+
+		if (!req.user) {
+			req.user = { id: decodedToken.uid }
+		} else {
+			req.user.id = decodedToken.uid
+		}
+
 		next()
-	} else {
-		res.send({
-			error: 'Token invalid.'
-		})
+	} catch (err) {
+		console.log(err)
+		res.status(403).send({ err })
 	}
 }

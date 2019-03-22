@@ -4,11 +4,6 @@ const ExhibitionService = require('../services/exhibition')
 
 const router = new Router()
 
-/*
-const routers = (mongoose) => new Router()
-	.get()
-*/
-
 // Get all exhibitions
 router.get('/', async (req, res) => {
 	res.send(await ExhibitionService.readAll())
