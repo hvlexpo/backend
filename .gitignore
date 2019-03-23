@@ -88,3 +88,6 @@ config/serviceAccountKey.json
 config/.env
 
 .vscode
+
+# React app
+build
