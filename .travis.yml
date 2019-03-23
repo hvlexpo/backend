@@ -1,6 +1,16 @@
 name: "Node Backend"
 language: node_js
-if: branch IN (master, backend-development)
-node_js: "stable"
+if: branch IN (master, development, backend-development)
+matrix:
+    include:
+        - name: Node 8
+          node_js: "8"
+        - name: Node 10
+          node_js: "10"
+        - name: Node 11
+          node_js: "11"
 install: npm i
 script: npm test
+cache:
+    directories:
+        - $HOME/node_modules
