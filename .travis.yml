@@ -1,6 +1,7 @@
 name: "Node Backend"
 language: node_js
-if: branch IN (master, development, backend-development)
+env:
+    - NODE_ENV=CI
 matrix:
     include:
         - name: Node 8
