@@ -10,26 +10,27 @@
 	},
 	"private": true,
 	"dependencies": {
+		"atob": "^2.1.2",
 		"dotenv": "^7.0.0",
 		"express": "^4.16.4",
 		"firebase": "^5.9.1",
 		"firebase-admin": "^7.1.1",
 		"helmet": "^3.16.0",
-		"jsonwebtoken": "^8.5.0",
+		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.4.19",
 		"morgan": "^1.9.1",
 		"parse-error": "^0.2.0",
 		"passport": "^0.4.0",
 		"passport-firebase-auth": "0.0.0-beta.1",
 		"passport-jwt": "^4.0.0",
-		"pg": "^7.8.2"
+		"pg": "^7.9.0"
 	},
 	"devDependencies": {
 		"ava": "^1.3.1",
 		"concurrently": "^4.1.0",
-		"eslint": "^5.15.1",
+		"eslint": "^5.15.3",
 		"nodemon": "^1.18.10",
-		"now": "^14.1.0",
+		"now": "^14.2.3",
 		"nyc": "^13.3.0",
 		"rimraf": "^2.6.3"
 	},
@@ -41,7 +42,7 @@
 		"test": "ava",
 		"lint": "eslint",
 		"coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-		"build:react": "rimraf build && cd ../frontend && npm run yank",
+		"build:react": "rimraf build && cd ../webapp && npm run build:backend",
 		"deploy:now": "now",
 		"deploy:now:alias": "now && now alias"
 	},
