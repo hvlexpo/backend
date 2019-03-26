@@ -1,7 +1,7 @@
 {
-	"name": "hvl-expo",
+	"name": "hvl-expo-backend",
 	"version": 1,
-	"alias": "expo.sondregjellestad.space",
+	"alias": "api.expo.sondregjellestad.space",
 	"env": { 
 		"NODE_ENV": "production",
 		"POSTGRES_URL": "@postgres_url",
