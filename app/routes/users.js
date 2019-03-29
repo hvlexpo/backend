@@ -6,7 +6,11 @@ const router = new Router()
 
 // Get current user
 router.get('/', async (req, res) => {
-	res.send(await UserService.createOrRead(req.user.id))
+	const data = await UserService.read(req.user.id)
+	
+	return data
+		? res.send(data)
+		: res.send({err: 'User not found'})
 })
 
 // Get all users
