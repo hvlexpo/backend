@@ -4,8 +4,15 @@ const UserService = require('../services/user')
 
 const router = new Router()
 
-// Get all users
+// Get current user
 router.get('/', async (req, res) => {
+	res.send(await UserService.createOrRead(req.user.id))
+})
+
+// Get all users
+router.get('/all', async (req, res) => {
+	// TODO Check admin privileges
+
 	res.send(await UserService.readAll())
 })
 
@@ -14,7 +21,7 @@ router.get('/user', async (req, res) => {
 	res.send(await UserService.read(req.user.id))
 })
 
-// Create
+// Create user
 router.post('/', async (req, res) => {
 	//Spør firebase om id med token
 	res.send(await UserService.create(req.user.id, req.body))
@@ -28,6 +35,8 @@ router.put('/', async (req, res) => {
 
 // Delete
 router.delete('/', async (req, res) => {
+	// TODO Check admin privileges
+
 	res.send(await UserService.delete(req.user.id))
 })
 

@@ -5,12 +5,17 @@ const VotesService = require('../services/vote')
 const router = new Router()
 
 // Get all votes
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
 	res.send(await VotesService.readAll())
 })
 
 // Read
 router.get('/:exhibition_id', async (req, res) => {
+	res.send(await VotesService.read(req.user.id, req.params.exhibition_id))
+})
+
+// Get vote count for exhibition
+router.get('/:exhibition_id/count', async (req, res) => {
 	res.send(await VotesService.read(req.user.id, req.params.exhibition_id))
 })
 

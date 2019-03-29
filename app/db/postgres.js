@@ -1,6 +1,9 @@
 const { Client } = require('pg')
 
-const { POSTGRES_URL } = process.env
+let POSTGRES_URL
+if (process.env.NODE_ENV !== 'CI') {
+	POSTGRES_URL = process.env.POSTGRES_URL
+}
 
 if (!POSTGRES_URL) {
 	console.log('No Postgres URL. Exiting...')

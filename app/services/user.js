@@ -27,6 +27,20 @@ class UserService {
 		}
 	}
 
+	static async createOrRead(id) {
+		const value = [id, {name: ''}]
+		const { rows } = await postgres.query(`
+		INSERT INTO users(name, value) 
+		SELECT '', 'true'
+		WHERE NOT EXISTS (
+			SELECT 1 FROM keys WHERE name='blah'
+		);
+		`,
+		value)
+		
+		return rows[0].data
+	}
+
 	static async update(id, { name }) {
 		const value = [{ id, name }, id]
 		const { rows } = await postgres.query(

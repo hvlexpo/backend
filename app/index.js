@@ -4,12 +4,10 @@ const express = require('express')
 const helmet = require('helmet')
 const logger = require('morgan')
 
-const firebaseMiddleware = require('./auth/firebase')
-
-//Start Postgres
+// Start Postgres
 const postgres = require('./db/postgres')
 
-//Create initial empty table if not exists
+// Create initial empty table if not exists
 const createVoteTable = require('./schemas/vote')
 const createUserTable = require('./schemas/user')
 const createExhibitionTable = require('./schemas/exhibition')
@@ -32,14 +30,26 @@ app // Middleware
 			dotfiles: 'ignore'
 		})
 	)
-	.use(firebaseMiddleware)
 
-// Setup dev config
-if (process.env.NODE_ENV !== 'production') {
+// Setup env config
+if (process.env.NODE_ENV === 'production') {
+	const firebaseMiddleware = require('./auth/firebase')
+
+	app.use(firebaseMiddleware)
+	app.use(logger('tiny'))
+} else if (process.env.NODE_ENV === 'CI') {
 	app.use(logger('dev'))
 } else {
-	app.use(logger('tiny'))
+	const firebaseMiddleware = require('./auth/firebase')
+
+	app.use(firebaseMiddleware)
+	app.use(logger('dev'))
 }
+
+app.get('/test', async (req, res) => {
+	console.log('Token good 😎')
+	res.status(200).send('Token good 😎')
+})
 
 const // Routers
 	exhibitions = require('./routes/exhibitions'),
@@ -47,8 +57,8 @@ const // Routers
 	votes = require('./routes/votes')
 
 app // Routes
-	.use('/api/exhibitions', exhibitions)
-	.use('/api/users', users)
-	.use('/api/votes', votes)
+	.use('/exhibitions', exhibitions)
+	.use('/users', users)
+	.use('/votes', votes)
 
 module.exports = app
