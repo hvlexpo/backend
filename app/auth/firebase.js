@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
 	console.log('🔐 Token', firebasetoken)
 
 	if (!firebasetoken) {
-		res.status(400).send({
+		return res.status(400).send({
 			error: 'No token.'
 		})
 	}
