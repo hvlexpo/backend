@@ -1,8 +1,8 @@
 const postgres = require('../db/postgres')
 
 class ExhibitionService {
-	static async create({ id, name, desc, photo }) {
-		const value = [{ id, name, desc, photo }]
+	static async create({ id, name, description, photos }) {
+		const value = [{ id, name, description, photos }]
 		const { rows } = await postgres.query(
 			'INSERT INTO exhibitions(data) VALUES($1) RETURNING *',
 			value

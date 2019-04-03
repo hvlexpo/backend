@@ -20,11 +20,6 @@ router.get('/all', async (req, res) => {
 	res.send(await UserService.readAll())
 })
 
-// Read
-router.get('/user', async (req, res) => {
-	res.send(await UserService.read(req.user.id))
-})
-
 // Create user
 router.post('/', async (req, res) => {
 	//Spør firebase om id med token

@@ -5,7 +5,7 @@ const ExhibitionService = require('../services/exhibition')
 const router = new Router()
 
 // Get all exhibitions
-router.get('/all', async (req, res) => {
+router.get('/', async (req, res) => {
 	res.send(await ExhibitionService.readAll())
 })
 
