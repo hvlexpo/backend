@@ -1,139 +1,17 @@
+name: "Node Backend"
+language: node_js
+env:
+    - NODE_ENV=CI
 matrix:
-  include:
-
-    # Flutter Android build
-    - name: "Flutter Android"
-      if: branch IN (master, mobile-development)
-      os: linux
-      dist: xenial
-      language: android
-      env:
-        global:
-          - ANDROID_API_LEVEL=28
-          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-          - ANDROID_ABI=armeabi-v7a
-          - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
-      android:
-        components:
-          - tools
-          - platform-tools
-          - tools
-          - extra-android-m2repository
-      licenses:
-        - android-sdk-preview-license-.+
-        - android-sdk-license-.+
-        - google-gdk-license-.+
-      jdk: oraclejdk8
-      sudo: false
-      addons:
-        apt:
-          update: true
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - libstdc++6
-            - fonts-droid
-            - gradle
-      before_install:
-        - touch $HOME/.android/repositories.cfg
-        - yes | sdkmanager "platforms;android-28"
-        - yes | sdkmanager "build-tools;28.0.3"
-      before_script:
-        - cd mobile
-        - openssl aes-256-cbc -K $encrypted_8d3f39b55532_key -iv $encrypted_8d3f39b55532_iv -in secrets.tar.enc -out secrets.tar -d
-        - tar xvf secrets.tar
-        - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
-        - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
-        - flutter doctor
-      script:
-        - flutter packages get
-        - flutter clean
-        - flutter test
-        - flutter build apk --build-number=$TRAVIS_BUILD_NUMBER
-
-    # Flutter iOS build
-    - name: "Flutter iOS"
-      os: osx
-      language: generic
-      if: branch IN (master, mobile-development)
-      env:
-        global:
-          - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
-      osx_image: xcode10.1
-      addons:
-        homebrew:
-          update: true
-          packages:
-            - ideviceinstaller
-            - ios-deploy
-            - libimobiledevice
-            - usbmuxd
-      before_install:
-        - yes | gem uninstall cocoapods
-        - yes | rm /usr/local/bin/xcodeproj
-        - brew install cocoapods
-        - yes | brew link --overwrite cocoapods
-        - cd mobile
-        - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
-        - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
-        - sudo chmod -R 777 flutter/*
-      before_script:
-        - flutter doctor
-      script:
-        - flutter packages get
-        - flutter clean
-        - flutter test
-        - travis_wait 30 flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
-
-    # Node tests
-    -  name: "Node Backend"
-       language: node_js
-       if: branch IN (master, backend-development)
-       node_js:
-         - "stable"
-       cache:
-         directories:
-          - backend/node_modules
-       script:
-         - cd backend
-         
-         - npm i
-         - npm test
-         #- npm run build
-       #deploy:
-        #  provider: surge
-        # skip_cleanup: true
-        #  domain: <my_name_here>.surge.sh
-        # project: ./build/
-       #on:
-       #  branch: master
-
-       # React tests
-    -  name: "React App"
-       language: node_js
-       if: branch IN (master, frontend-development)
-       node_js:
-         - "stable"
-       cache:
-         directories:
-          - frontend/node_modules
-       script:
-         - cd frontend
-         
-         - npm i
-         - npm test
-         - npm run build
-       #deploy:
-        #  provider: surge
-        # skip_cleanup: true
-        #  domain: <my_name_here>.surge.sh
-        # project: ./build/
-       #on:
-       #  branch: master
-
+    include:
+        - name: Node 8
+          node_js: "8"
+        - name: Node 10
+          node_js: "10"
+        - name: Node 11
+          node_js: "11"
+install: npm i
+script: npm test
 cache:
-  directories:
-    - $HOME/.pub-cache
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
+    directories:
+        - $HOME/node_modules
