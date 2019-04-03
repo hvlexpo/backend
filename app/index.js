@@ -23,7 +23,7 @@ const app = express()
 
 app // Middleware
 	.use(helmet())
-	.use(express.json({ type: 'application/json' }))
+	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
 	.use(
 		express.static(require('path').join(__dirname, '..', 'build'), {
