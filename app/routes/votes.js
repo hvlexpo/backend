@@ -4,6 +4,11 @@ const VotesService = require('../services/vote')
 
 const router = new Router()
 
+// Get my votes
+router.get('/', async (req, res) => {
+	res.send(await VotesService.readForUser(req.user.id))
+})
+
 // Get all votes
 router.get('/all', async (req, res) => {
 	res.send(await VotesService.readAll())
