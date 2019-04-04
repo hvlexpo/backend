@@ -24,7 +24,7 @@ router.put('/:id', async (req, res) => {
 	res.send(await ExhibitionService.update(req.params.id, req.body))
 })
 
-// Delete
+// Delete | Admin only
 router.delete('/:id', async (req, res) => {
 	res.send(await ExhibitionService.delete(req.params.id))
 })

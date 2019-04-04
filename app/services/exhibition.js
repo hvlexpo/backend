@@ -1,8 +1,8 @@
 const postgres = require('../db/postgres')
 
 class ExhibitionService {
-	static async create({ id, name, description, photos }) {
-		const value = [{ id, name, description, photos }]
+	static async create({ id, name, description, creators, photos }) {
+		const value = [{ id, name, description, creators, photos }]
 		const { rows } = await postgres.query(
 			'INSERT INTO exhibitions(data) VALUES($1) RETURNING *',
 			value
@@ -25,8 +25,8 @@ class ExhibitionService {
 		return rows[0].data
 	}
 
-	static async update(id, { name, desc, photo }) {
-		const value = [{ id, name, desc, photo }, id]
+	static async update({ id, name, description, creators, photos }) {
+		const value = [{ id, name, description, creators, photos }, id]
 		const { rows } = await postgres.query(
 			"UPDATE exhibitions SET data = $1 WHERE data ->> 'id'= $2 RETURNING *",
 			value
