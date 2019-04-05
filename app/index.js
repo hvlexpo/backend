@@ -2,6 +2,7 @@
 
 const express = require('express')
 const helmet = require('helmet')
+const cors = require('cors')
 const logger = require('morgan')
 
 // Start Postgres
@@ -23,6 +24,7 @@ const app = express()
 
 app // Middleware
 	.use(helmet())
+	.use(cors())
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
 	.use(
