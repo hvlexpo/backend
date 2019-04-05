@@ -41,7 +41,11 @@ class VoteService {
 			"UPDATE votes SET data = $1 WHERE data ->> 'user_id'= $2 AND data ->> 'exhibition_id' = $3 RETURNING *",
 			value
 		)
-		return rows[0].data
+		if (rows[0]) {
+			return rows[0].data
+		} else {
+			return this.create(user_id, exhibition_id, weight)
+		}
 	}
 
 	static async delete(user_id, exhibition_id) {
