@@ -27,7 +27,7 @@ router.get('/:exhibition_id/count', async (req, res) => {
 // Update
 router.put('/:exhibition_id', async (req, res) => {
 	const {weight} = req.body
-
+	
 	res.send(
 		await VotesService.update(req.user.id, req.params.exhibition_id, weight)
 	)

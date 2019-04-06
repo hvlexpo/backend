@@ -13,7 +13,7 @@ class VoteService {
 	static async read(user_id, exhibition_id) {
 		const value = [user_id, exhibition_id]
 		const { rows } = await postgres.query(
-			"SELECT * FROM votes WHERE data ->> 'user_id'= $1 AND 'exhibition_id' = $2",
+			"SELECT * FROM votes WHERE data ->> 'user_id'= $1 AND data ->> 'exhibition_id' = $2",
 			value
 		)
 		return rows[0].data
@@ -51,9 +51,14 @@ class VoteService {
 	static async delete(user_id, exhibition_id) {
 		const value = [user_id, exhibition_id]
 		const { rows } = await postgres.query(
-			"DELETE FROM votes WHERE data ->> 'user_id'= $1 AND 'exhibition_id = $2 RETURNING *",
+			"DELETE FROM votes WHERE data ->> 'user_id'= $1 AND data ->> 'exhibition_id' = $2 RETURNING *",
 			value
 		)
+
+		if (rows.length < 1) {
+			return {}
+		}
+
 		return rows[0].data
 	}
 }
