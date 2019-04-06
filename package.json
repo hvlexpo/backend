@@ -1,0 +1,54 @@
+{
+	"name": "hvl-expo-backend",
+	"description": "Backend server for the HVL EXPO app",
+	"version": "0.1.0",
+	"license": "MIT",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hvlexpo/hvlexpo"
+	},
+	"private": true,
+	"dependencies": {
+		"atob": "^2.1.2",
+		"cors": "^2.8.5",
+		"dotenv": "^7.0.0",
+		"express": "^4.16.4",
+		"firebase": "^5.9.3",
+		"firebase-admin": "^7.2.0",
+		"helmet": "^3.16.0",
+		"morgan": "^1.9.1",
+		"parse-error": "^0.2.0",
+		"pg": "^7.9.0"
+	},
+	"devDependencies": {
+		"ava": "^1.4.1",
+		"concurrently": "^4.1.0",
+		"eslint": "^5.16.0",
+		"nodemon": "^1.18.10",
+		"now": "^15.0.2",
+		"nyc": "^13.3.0",
+		"rimraf": "^2.6.3"
+	},
+	"scripts": {
+		"start": "node index.js",
+		"server": "nodemon",
+		"server:frontend": "npm run start --prefix ../frontend",
+		"dev": "concurrently \"npm run server\" \"npm run server:frontend\"",
+		"test": "ava",
+		"lint": "eslint",
+		"coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+		"build:react": "rimraf build && cd ../webapp && npm run build:backend",
+		"deploy:now": "now",
+		"deploy:now:alias": "now && now alias"
+	},
+	"engines": {
+		"node": "^10"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
+}
