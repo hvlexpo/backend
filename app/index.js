@@ -27,11 +27,6 @@ app // Middleware
 	.use(cors())
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
-	.use(
-		express.static(require('path').join(__dirname, '..', 'build'), {
-			dotfiles: 'ignore'
-		})
-	)
 
 // Setup env config
 if (process.env.NODE_ENV === 'production') {
