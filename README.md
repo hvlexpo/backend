@@ -56,9 +56,9 @@ Information on how to download and install/run web and mobile clients.
 | 9             | Initial planning, product planning  | ✅    |
 | 10            | First iteration; vision             | ✅    |
 | 11            | Second iteration; architecture      | ✅    |
-| 12            | Third iteration; implementation     | 🔄    |
-| 13            | Fourth iteration; implementation    | 🔜    |
-| 14            | Presentation and summary            | 🔜    |
+| 12            | Third iteration; implementation     | ✅    |
+| 13            | Fourth iteration; implementation    | ✅    |
+| 14            | Presentation and summary            | ✅    |
 
 ## Credits
 
