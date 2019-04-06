@@ -16,6 +16,7 @@
   <a href="https://github.com/hvlexpo/backend/graphs/contributors">
       <img src="https://img.shields.io/github/contributors/hvlexpo/backend.svg">
   </a>
+
   <a href="https://www.hvl.no">
     <img src="https://img.shields.io/badge/hvl-dat109-blue.svg">
   </a>
